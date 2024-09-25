@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
-import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, Background, LetterFx, SmartImage, IconButton } from '@/once-ui/components';
+import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, Background, LetterFx, SmartImage, IconButton, Input } from '@/once-ui/components';
 import Link from 'next/link';
 
 export default function Home() {
@@ -28,6 +28,28 @@ export default function Home() {
 			description: "Certifications and education.",
 		},
 	];
+
+    const [showPasswordInput, setShowPasswordInput] = useState(false);
+    const [password, setPassword] = useState('');
+    const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
+
+    const correctPassword = "PasswordCV";
+
+    const handlePasswordSubmit = () => {
+        if (password === correctPassword) {
+        setIsPasswordCorrect(true);
+        window.location.href = "/CV.pdf";
+        } else {
+        alert("Password salah. Silakan hubungi 0859-5283-5509");
+        setPassword('');
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+          handlePasswordSubmit();
+        }
+      };
     
     const profileRef = useRef(null);
 	const experienceRef = useRef(null);
@@ -95,49 +117,112 @@ export default function Home() {
 							</Text>
                             <Flex
                             position="relative"
-                            flex={4} gap="24" marginBottom="104"
-                            direction="column">
+                            flex={4}
+                            gap="24"
+                            marginBottom="104"
+                            direction="column"
+                            >
                             <Button
                                 variant="primary"
                                 size="l"
-                                href="/CV.pdf"
-                                label='Download CV'
-                                download={"CV.pdf"}
-                                >
-                                </Button>
+                                onClick={() => setShowPasswordInput(true)} // Tampilkan input password saat tombol diklik
+                                label="Download CV"
+                            >
+                            </Button>
+                            {showPasswordInput && (
+                                <Flex
+                                    position="relative"
+                                    flex={4} gap="24"
+                                    direction="column">
+                                    <Input
+                                            type="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            onKeyDown={handleKeyDown}
+                                            label="Password CV"
+                                            id={''} />
+                                    <Flex
+                                        position="relative"
+                                        flex={4} gap="24"
+                                        direction="row">
+                                        <Button
+                                            variant="primary"
+                                            size="m"
+                                            onClick={handlePasswordSubmit}>
+                                            Submit
+                                        </Button>
+                                        {/* add button close */}
+                                        <Button
+                                            variant="danger"
+                                            size="m"
+                                            onClick={() => setShowPasswordInput(false)}>
+                                            Close
+                                        </Button>
+                                    </Flex>
+                                </Flex>
+                            )}
                             <Flex
                                 position="relative"
                                 flex={4} gap="24"
-                                direction="row">
+                                direction="row"
+                                justifyContent='space-between'
+                                fillWidth>
                                 <Button
-                                    variant="primary"
-                                    size="s"
+                                    variant="tertiary"
+                                    size="m"
                                     prefixIcon='openLink'
-                                    href="https://github.com/msultanr">
+                                    href="https://github.com/msultanr"
+                                    fillWidth>
                                     Github
                                 </Button>
                                 <Button
-                                    variant="primary"
-                                    size="s"
+                                    variant="tertiary"
+                                    size="m"
                                     prefixIcon='openLink'
-                                    href="https://www.linkedin.com/in/msultanr/">
+                                    href="https://www.linkedin.com/in/msultanrafi/"
+                                    fillWidth>
                                     LinkedIn
                                 </Button>
                                 <Button
-                                    variant="primary"
-                                    size="s"
+                                    variant="tertiary"
+                                    size="m"
                                     prefixIcon='openLink'
-                                    href="https://twitter.com/msultanr_">
+                                    href="https://twitter.com/msultanr_"
+                                    fillWidth>
                                     Twitter
                                 </Button>
-                                <Button
-                                    variant="primary"
-                                    size="s"
+                            </Flex>
+                            <Flex
+                                position="relative"
+                                flex={4} gap="24"
+                                direction="row"
+                                justifyContent='space-between'
+                                fillWidth>
+                            <Button
+                                    variant="tertiary"
+                                    size="m"
                                     prefixIcon='openLink'
-                                    href="https://www.instagram.com/msultanr_/">
+                                    href="https://www.instagram.com/msultanr_/"
+                                    fillWidth>
                                     Instagram
                                 </Button>
-                            </Flex>
+                                <Button
+                                    variant="tertiary"
+                                    size="m"
+                                    prefixIcon='openLink'
+                                    href="mailto:msultanrafi@gmail.com"
+                                    fillWidth>
+                                    Gmail
+                                </Button>
+                                <Button
+                                    variant="tertiary"
+                                    size="m"
+                                    prefixIcon='openLink'
+                                    href="https://wa.me/6285952835509"
+                                    fillWidth>
+                                    WhatsApp
+                                </Button>
+                                </Flex>
                             </Flex>
 						</Flex>
 					</Flex>
