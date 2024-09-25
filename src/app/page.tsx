@@ -2,25 +2,25 @@
 
 import React from 'react';
 
-import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, Background, LetterFx } from '@/once-ui/components';
+import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, Background, LetterFx, SmartImage } from '@/once-ui/components';
 import Link from 'next/link';
 
 export default function Home() {
 	const links = [
 		{
-			href: "https://once-ui.com/docs/theming",
-			title: "Themes",
-			description: "Style your app in minutes.",
+			href: "/profile",
+			title: "Profile",
+			description: "About and social links.",
 		},
 		{
-			href: "https://once-ui.com/docs/flexComponent",
-			title: "Layout",
-			description: "Build responsive layouts.",
+			href: "/experience",
+			title: "Work Experience",
+			description: "Professional career history.",
 		},
 		{
-			href: "https://once-ui.com/docs/typography",
-			title: "Typography",
-			description: "Scale text automatically.",
+			href: "/education",
+			title: "Education",
+			description: "Education and certifications.",
 		},
 	];
 
@@ -44,11 +44,6 @@ export default function Home() {
 						fillWidth gap="24">
 						<Flex
 							position="relative"
-							flex={2} paddingTop="56" paddingX="xl">
-							<Logo size="xl" icon={false} style={{zIndex: '1'}}/>
-						</Flex>
-						<Flex
-							position="relative"
 							flex={4} gap="24" marginBottom="104"
 							direction="column">
 							<InlineCode
@@ -56,61 +51,62 @@ export default function Home() {
 								style={{
 									width: 'fit-content',
 									padding: 'var(--static-space-8) var(--static-space-16)',
-									backdropFilter: 'blur(var(--static-space-1))'}}>
-								Start by editing <span className="brand-on-background-medium">app/page.tsx</span>
+									backdropFilter: 'blur(var(--static-space-1))',
+									alignSelf: 'center'}}>
+								Personal Website <span className="brand-on-background-medium"></span>
 							</InlineCode>
 							<Heading
 								wrap="balance"
-								variant="display-strong-s">
+								variant="display-strong-s"
+								align='center'>
 								<span className="font-code">
 									<LetterFx
 										trigger="instant">
-										Helping designers code and developers design
+											Muhammad Sultan Rafi
 									</LetterFx>
 								</span>
 							</Heading>
-							<Button
-								href="https://once-ui.com/docs"
-								suffixIcon="chevronRight"
-								variant="secondary">
-								Read docs
-							</Button>
+							<Text
+								variant="body-default-m"
+								onBackground="neutral-weak"
+								align="justify">
+								<LetterFx
+									trigger="instant">
+										Selamat datang di personal website saya! 
+								</LetterFx>
+							</Text>
+							<Text
+								variant="body-default-m"
+								onBackground="neutral-weak"
+								align="justify">
+										Saya seorang Software Engineer yang berfokus pada membangun aplikasi yang efisien dan inovatif. 
+										Dengan pengalaman dalam berbagai proyek teknologi modern, 
+										saya selalu berusaha untuk menciptakan solusi yang tidak hanya bermanfaat tetapi juga berdampak positif bagi perkembangan digital. 
+										Saya percaya bahwa teknologi adalah alat yang dapat mengubah dunia, dan saya bersemangat untuk terus berkontribusi dalam membentuk masa depan melalui inovasi.
+							</Text>
+							<Text
+								variant="body-default-m"
+								onBackground="neutral-weak"
+								align="justify">
+								<LetterFx
+									trigger="instant">
+										Jelajahi karya, pengalaman profesional, dan perjalanan akademis saya di sini. 
+								</LetterFx>
+							</Text>
 						</Flex>
 					</Flex>
-					<Grid
-						radius="l"
-						border="neutral-medium"
-						borderStyle="solid-1"
-						columns="repeat(3, 1fr)"
-						tabletColumns="1col"
-						mobileColumns="1col"
-						fillWidth>
-						{links.map((link) => (
-							<Link
-								target="_blank"
-								style={{ padding: 'var(--responsive-space-l)' }}
-								key={link.href}
-								href={link.href}>
-								<Flex
-									fillWidth paddingY="8" gap="8"
-									direction="column">
-									<Flex
-										fillWidth gap="12"
-										alignItems="center">
-										<Text
-											variant="body-strong-m" onBackground="neutral-strong">
-											{link.title}
-										</Text>
-										<Icon size="s" name="arrowUpRight" />
-									</Flex>
-									<Text
-										variant="body-default-s" onBackground="neutral-weak">
-										{link.description}
-									</Text>
-								</Flex>
-							</Link>
-						))}
-					</Grid>
+					<Flex
+						justifyContent='center'
+						alignItems='center'>
+						<Button
+							fillWidth
+							href="/profile"
+							size="l"
+							variant="primary"
+							prefixIcon="profile"
+							label="Profile">
+						</Button>
+					</Flex>
 				</Flex>
 			</Flex>
 			<Flex
@@ -120,22 +116,9 @@ export default function Home() {
 				justifyContent="space-between">
 				<Text
 					variant="body-default-s" onBackground="neutral-weak">
-					© 2024 Once UI, <Link href="https://github.com/once-ui-system/nextjs-starter?tab=MIT-1-ov-file">MIT License</Link>
+					© 2024 Build With Once UI Next JS, <Link href="https://github.com/once-ui-system/nextjs-starter?tab=MIT-1-ov-file">MIT License</Link>
 				</Text>
-				<Flex
-					gap="12">
-					<Button
-						href="https://github.com/once-ui-system/nextjs-starter"
-						prefixIcon="github" size="s" variant="tertiary">
-						GitHub
-					</Button>
-					<Button
-						href="https://discord.com/invite/5EyAQ4eNdS"
-						prefixIcon="discord" size="s" variant="tertiary">
-						Discord
-					</Button>
-				</Flex>
-			</Flex>
+			</Flex> 
 		</Flex>
 	);
 }

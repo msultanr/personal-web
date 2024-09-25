@@ -3,7 +3,7 @@
 import React, { useState, useRef, useCallback, useEffect, forwardRef, ReactNode } from 'react';
 import classNames from 'classnames';
 
-const defaultAllowedCharacters = ['X', '$', '@', 'a', 'H', 'z', 'o', '0', 'y', '#', '?', '*', '0', '1', '+'];
+const defaultAllowedCharacters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
 function getRandomCharacter(charset: string[]): string {
 	const randomIndex = Math.floor(Math.random() * charset.length);
