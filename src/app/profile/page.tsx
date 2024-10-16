@@ -2,8 +2,9 @@
 
 import React, { useRef, useState } from 'react';
 
-import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, Background, LetterFx, SmartImage, IconButton, Input } from '@/once-ui/components';
+import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, Background, LetterFx, SmartImage, IconButton, Input, SmartLink } from '@/once-ui/components';
 import Link from 'next/link';
+import './style.css';
 
 export default function Home() {
 	const links = [
@@ -548,33 +549,84 @@ export default function Home() {
 
                             <Flex direction="column" gap="s">
                             <Flex justifyContent="space-between">
+                            </Flex>
+
+                            {/* add carousel */}
                             <Text
                                 className="shadow-m"
                                 variant='heading-default-m'
+                                align='center'
                                 style={{
                                 textDecoration: 'underline',
                                 width: 'fit-content',
                                 padding: 'var(--static-space-8) var(--static-space-16)',
                                 backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
+                                fontSize: 16,
                                 }}
                             >
-                                Front End
+                                Front end
                             </Text>
-                            </Flex>
-                            
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                            }}
-                            >
-                                HTML, CSS, Javascript include React dan Next.js.
-                            </Text>
+                            {/* carousel contain logo of tech */}
+
+                            <div className='slider'>
+                                <div className='slide-track'>
+                                    <div className='slide'>
+                                        <img src="images/logo/html.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/css.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/javascript.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/react.webp" alt="" />
+                                    </div>
+                                    <div className='blackSlide'>
+                                        <img src="images/logo/next.webp"  alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/vue.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/html.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/css.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/javascript.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/react.webp" alt="" />
+                                    </div>
+                                    <div className='blackSlide'>
+                                        <img src="images/logo/next.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/vue.webp" alt="" />
+                                    </div><div className='slide'>
+                                        <img src="images/logo/html.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/css.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/javascript.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/react.webp" alt="" />
+                                    </div>
+                                    <div className='blackSlide'>
+                                        <img src="images/logo/next.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/vue.webp" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <Text
                             className="shadow-m"
                             variant='heading-default-m'
@@ -589,72 +641,73 @@ export default function Home() {
                                 Back end
                             </Text>
 
-                            <Text
-                            className="shadow-m"
-                            onSolid='neutral-weak'
-                            style={{
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                PHP include Laravel, javascript include Node.js, Java.
-                            </Text>
-
-                            <Text
-                            className="shadow-m"
-                            variant='heading-default-m'
-                            style={{
-                            textDecoration: 'underline',
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                Fullstack (Desktop App)
-                            </Text>
-
-                            <Text
-                            className="shadow-m"
-                            onSolid='neutral-weak'
-                            style={{
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                C#, .NET, VB.
-                            </Text>
-
-                            <Text
-                            className="shadow-m"
-                            variant='heading-default-m'
-                            style={{
-                            textDecoration: 'underline',
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                Data
-                            </Text>
-
-                            <Text
-                            className="shadow-m"
-                            onSolid='neutral-weak'
-                            style={{
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                Python
-                            </Text>
+                            <div className='slider'>
+                                <div className='slide-track'>
+                                    <div className='slide'>
+                                        <img src="images/logo/php.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/laravel.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/node.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/java.webp" alt="" />
+                                    </div>
+                                    <div className='blackSlide'>
+                                        <img src="images/logo/csharp.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/dotnet.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/python.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/php.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/laravel.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/node.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/java.webp" alt="" />
+                                    </div>
+                                    <div className='blackSlide'>
+                                        <img src="images/logo/csharp.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/dotnet.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/python.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/php.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/laravel.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/node.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/java.webp" alt="" />
+                                    </div>
+                                    <div className='blackSlide'>
+                                        <img src="images/logo/csharp.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/dotnet.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/python.webp" alt="" />
+                                    </div>
+                                </div>
+                            </div>
 
                             <Text
                             className="shadow-m"
@@ -670,18 +723,55 @@ export default function Home() {
                                 Database
                             </Text>
 
-                            <Text
-                            className="shadow-m"
-                            onSolid='neutral-weak'
-                            style={{
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                MySQL, MariaDB, PostgreSQL, Oracle, SQL Server.
-                            </Text>
+                            <div className='slider'>
+                                <div className='slide-track'>
+                                    <div className='slide'>
+                                        <img src="images/logo/mysql.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/mariadb.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/postgresql.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/oracle.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/sqlserver.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/mysql.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/mariadb.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/postgresql.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/oracle.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/sqlserver.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/mysql.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/mariadb.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/postgresql.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/oracle.webp" alt="" />
+                                    </div>
+                                    <div className='slide'>
+                                        <img src="images/logo/sqlserver.webp" alt="" />
+                                    </div>
+                                </div>
+                            </div>
 
                             <Text
                             className="shadow-m"
@@ -789,6 +879,62 @@ export default function Home() {
                                 Secure Coding - Widya Security (2021)
                             </Text>
                     </Flex>
+                    
+                    <Flex
+                            position="relative"
+                            flex={4} gap="24"
+                            direction="column"
+                            ref={educationRef} id='education'>
+                            <InlineCode
+                                className="shadow-m"
+                                style={{
+                                    width: 'fit-content',
+                                    padding: 'var(--static-space-8) var(--static-space-16)',
+                                    backdropFilter: 'blur(var(--static-space-1))',
+                                    alignSelf: 'left',
+                                    fontSize: 18}}>
+                                Portofolio <span className="brand-on-background-medium"></span>
+                            </InlineCode>
+                            <Flex
+                                mobileDirection="column"
+                                fillWidth>
+                                <Flex
+                                    position="relative"
+                                    flex={2} paddingTop="56" paddingX="xl">
+                                    <img className='razan' src="images/logo/razansneakers.png" alt="" />
+                                </Flex>
+                                <Flex
+                                    position="relative"
+                                    flex={4} gap="24" marginBottom="104"
+                                    direction="column"
+                                    ref={profileRef} id='profile'>
+                                    <Heading
+                                        wrap="balance"
+                                        variant="display-strong-s">
+                                        <span className="font-code">
+                                            <LetterFx
+                                                trigger="instant">
+                                                    Razan Sneakers Store
+                                            </LetterFx>
+                                        </span>
+                                    </Heading>
+                                    <Text
+                                        variant="body-default-s"
+                                        onBackground="neutral-weak"
+                                        align="justify">
+                                                Razan Sneakers Store adalah situs e-commerce yang menjual sepatu 100% autentik.
+                                                Website ini dibuat menggunakan bahasa pemrograman php dan javascript,
+                                                serta sudah terintegrasi dengan midtrans payment gateway untuk pembayaran.
+                                    </Text>
+                                    <SmartLink
+                                        href='https://razansneakers.com'
+                                        >
+                                        Klik disini untuk lihat website
+                                        </SmartLink>
+                                </Flex>
+                            </Flex>
+                        </Flex>
+
 
                     <Flex
                             position="relative"

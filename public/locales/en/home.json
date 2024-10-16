@@ -1,0 +1,23 @@
+{
+    "personal_website": "Personal Website",
+    "name": "Muhammad Sultan Rafi",
+    "welcome_message": "Welcome to my personal website!",
+    "about_me": "I am a Software Engineer focused on building efficient and innovative applications. With experience in various modern technology projects, I always strive to create solutions that are not only useful but also have a positive impact on digital development. I believe that technology is a tool that can change the world, and I am excited to continue contributing to shaping the future through innovation.",
+    "explore_invitation": "Explore my journey, professional experience, and academic history here.",
+    "profile_button": "Profile",
+    "footer_text": "© {{year}} Build With Once UI Next JS,",
+    "links": {
+      "profile": {
+        "title": "Profile",
+        "description": "About and social media links."
+      },
+      "experience": {
+        "title": "Work Experience",
+        "description": "History Professional Career."
+      },
+      "education": {
+        "title": "Educations",
+        "description": "Certifications and education."
+      }
+    }
+  }
