@@ -6,28 +6,57 @@ import { Heading, Text, Flex, Button, Grid, Icon, InlineCode, Logo, Background, 
 import Link from 'next/link';
 import './style.css';
 
+// Perbaiki tipe untuk styling
+const gradientBackground: React.CSSProperties = {
+	background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(20,20,20,0.95) 100%)',
+	backdropFilter: 'blur(10px)',
+	border: '1px solid rgba(255,255,255,0.1)',
+	borderRadius: 'var(--radius-l)',
+};
+
+// Perbaiki tipe untuk card styling
+const cardStyle: React.CSSProperties = {
+	background: 'linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(20,20,20,0.95) 100%)',
+	backdropFilter: 'blur(10px)',
+	border: '1px solid rgba(255,255,255,0.1)',
+	borderRadius: 'var(--radius-l)',
+	padding: 'var(--space-l)',
+	transition: 'all 0.3s ease',
+	transform: 'translateY(0)', // Default state
+};
+
 export default function Home() {
 	const links = [
 		{
-			href: "#profile",
-			title: "Profile",
-			description: "About and social links.",
+			href: "#experience",
+			title: "Experience",
+			description: "Professional career history.",
+			icon: 'briefcase'
 		},
 		{
-			href: "#experience",
-			title: "Work Experience",
-			description: "Professional career history.",
+			href: "#skills",
+			title: "Skills",
+			description: "Skills and expertise.",
+			icon: 'code'
 		},
-        {
-            href : "#skills",
-            title: "Skills",
-            description: "Skills and expertise.",
-        },
+		{
+			href: "#portfolio",
+			title: "Portfolio",
+			description: "Project showcase.",
+			icon: 'layout'
+		},
+		{
+			href: "#certifications",
+			title: "Certifications",
+			description: "Achievements and certificates.",
+			icon: 'award'
+		},
 		{
 			href: "#education",
 			title: "Education",
-			description: "Certifications and education.",
-		},
+			description: "Academic background.",
+			icon: 'graduationCap'
+		}
 	];
 
     const [showPasswordInput, setShowPasswordInput] = useState(false);
@@ -61,962 +90,352 @@ export default function Home() {
 		ref.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
+	const handleSlide = (direction: 'prev' | 'next', trackId: string) => {
+		const track = document.getElementById(trackId);
+		if (!track) return;
+
+		const scrollAmount = direction === 'next' ? 300 : -300;
+		track.scrollTo({
+			left: track.scrollLeft + scrollAmount,
+			behavior: 'smooth'
+		});
+	};
+
 	return (
-		<Flex
-			fillWidth paddingTop="xl" paddingX="l"
-			direction="column" alignItems="center" flex={1}>
-			<Background
-				dots={false}/>
-			<Flex
-				position="relative"
-				as="section" overflow="hidden"
-				fillWidth minHeight="0" maxWidth={68}
-				direction="column" alignItems="center" flex={1}>
-				<Flex
-					as="main"
-					direction="column" justifyContent="center"
-					fillWidth fillHeight padding="l" gap="l">
-                    <InlineCode
-                            className="shadow-m"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                alignSelf: 'left',
-                                fontSize: 18}}>
-                            About <span className="brand-on-background-medium"></span>
-                    </InlineCode>
-					<Flex
-						mobileDirection="column"
-						fillWidth>
-						<Flex
-							position="relative"
-							flex={2} paddingTop="56" paddingX="xl">
-							<SmartImage src="/images/photo.jpeg" alt="Pas Foto" radius='l' height={20} objectFit='contain'/>
-						</Flex>
-						<Flex
-							position="relative"
-							flex={4} gap="24" marginBottom="104"
-							direction="column"
-                            ref={profileRef} id='profile'>
-							<Heading
-								wrap="balance"
-								variant="display-strong-s">
-								<span className="font-code">
-									<LetterFx
-										trigger="instant">
-											Muhammad Sultan Rafi
-									</LetterFx>
-								</span>
-							</Heading>
-							<Text
-								variant="body-default-m"
-								onBackground="neutral-weak"
-								align="justify">
-										Seorang Software Engineer yang berfokus pada membangun aplikasi yang efisien dan inovatif
-                                        serta selalu ingin belajar berbagai hal untuk meningkatkan keterampilan dan antusias untuk menemukan banyak pengalaman yang menantang.
-							</Text>
-                            <Flex
-                            position="relative"
-                            flex={4}
-                            gap="24"
-                            marginBottom="104"
-                            direction="column"
-                            >
-                            <Button
-                                variant="primary"
-                                size="l"
-                                onClick={() => setShowPasswordInput(true)} // Tampilkan input password saat tombol diklik
-                                label="Download CV"
-                            >
-                            </Button>
-                            {showPasswordInput && (
-                                <Flex
-                                    position="relative"
-                                    flex={4} gap="24"
-                                    direction="column">
-                                    <Input
-                                            type="password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            onKeyDown={handleKeyDown}
-                                            label="Password CV"
-                                            id={''} />
-                                    <Flex
-                                        position="relative"
-                                        flex={4} gap="24"
-                                        direction="row">
-                                        <Button
-                                            variant="primary"
-                                            size="m"
-                                            onClick={handlePasswordSubmit}>
-                                            Submit
-                                        </Button>
-                                        {/* add button close */}
-                                        <Button
-                                            variant="danger"
-                                            size="m"
-                                            onClick={() => setShowPasswordInput(false)}>
-                                            Close
-                                        </Button>
-                                    </Flex>
-                                </Flex>
-                            )}
-                            <Flex
-                                position="relative"
-                                flex={4} gap="24"
-                                direction="row"
-                                justifyContent='space-between'
-                                fillWidth>
-                                <Button
-                                    variant="tertiary"
-                                    size="m"
-                                    prefixIcon='openLink'
-                                    href="https://github.com/msultanr"
-                                    fillWidth>
-                                    Github
-                                </Button>
-                                <Button
-                                    variant="tertiary"
-                                    size="m"
-                                    prefixIcon='openLink'
-                                    href="https://www.linkedin.com/in/msultanrafi/"
-                                    fillWidth>
-                                    LinkedIn
-                                </Button>
-                                <Button
-                                    variant="tertiary"
-                                    size="m"
-                                    prefixIcon='openLink'
-                                    href="https://twitter.com/msultanr_"
-                                    fillWidth>
-                                    Twitter
-                                </Button>
-                            </Flex>
-                            <Flex
-                                position="relative"
-                                flex={4} gap="24"
-                                direction="row"
-                                justifyContent='space-between'
-                                fillWidth>
-                            <Button
-                                    variant="tertiary"
-                                    size="m"
-                                    prefixIcon='openLink'
-                                    href="https://www.instagram.com/msultanr_/"
-                                    fillWidth>
-                                    Instagram
-                                </Button>
-                                <Button
-                                    variant="tertiary"
-                                    size="m"
-                                    prefixIcon='openLink'
-                                    href="mailto:msultanrafi@gmail.com"
-                                    fillWidth>
-                                    Gmail
-                                </Button>
-                                <Button
-                                    variant="tertiary"
-                                    size="m"
-                                    prefixIcon='openLink'
-                                    href="https://wa.me/6285952835509"
-                                    fillWidth>
-                                    WhatsApp
-                                </Button>
-                                </Flex>
-                            </Flex>
-						</Flex>
-					</Flex>
-                    <Grid
-						radius="l"
-						border="neutral-medium"
-						borderStyle="solid-1"
-						columns="repeat(4, 1fr)"
-						tabletColumns="1col"
-						mobileColumns="1col"
-						fillWidth>
-						{links.map((link) => (
-							<Link
-								style={{ padding: 'var(--responsive-space-l)', cursor: 'pointer' }}
-								key={link.href} href={link.href}>
-								<Flex
-									fillWidth gap="8"
-									direction="column">
-									<Flex
-										fillWidth gap="12"
-										alignItems="center">
-										<Text
-											variant="body-strong-m" onBackground="neutral-strong">
-											{link.title}
-										</Text>
-										<Icon size="s" name="arrowUpRight" />
-									</Flex>
-									<Text
-										variant="body-default-s" onBackground="neutral-weak">
-										{link.description}
-									</Text>
-								</Flex>
-							</Link>
+		<div className="root-container">
+			<Background dots={false}/>
+			
+			{/* Hero Section with Sidebar */}
+			<div className="layout-container">
+				{/* Sidebar */}
+				<aside className="sidebar">
+					<SmartImage 
+						src="/images/photo.jpeg" 
+						alt="Pas Foto"
+						radius="full"
+						objectFit="cover"
+						className="profile-image"
+					/>
+
+					<Heading
+						variant="display-strong-s"
+						className="name-heading">
+						Muhammad Sultan Rafi
+					</Heading>
+
+					<Text
+						variant="body-default-s"
+						className="bio-text">
+						Software Engineer yang berfokus pada membangun aplikasi yang efisien dan inovatif
+					</Text>
+
+					<Button
+						variant="primary"
+						size="l"
+						onClick={() => setShowPasswordInput(true)}
+						label="Download CV"
+						className="download-button"
+					/>
+
+					{/* Social Links dengan Font Awesome */}
+					<div className="social-links">
+						{[
+							{
+								icon: <i className="fab fa-github"></i>,
+								link: 'https://github.com/msultanr',
+								label: 'GitHub'
+							},
+							{
+								icon: <i className="fab fa-linkedin"></i>,
+								link: 'https://www.linkedin.com/in/msultanrafi/',
+								label: 'LinkedIn'
+							},
+							{
+								icon: <i className="fab fa-twitter"></i>,
+								link: 'https://twitter.com/msultanr_',
+								label: 'Twitter'
+							},
+							{
+								icon: <i className="fab fa-instagram"></i>,
+								link: 'https://www.instagram.com/msultanr_/',
+								label: 'Instagram'
+							},
+							{
+								icon: <i className="fas fa-envelope"></i>,
+								link: 'mailto:msultanrafi@gmail.com',
+								label: 'Email'
+							}
+						].map(social => (
+							<Button
+								key={social.label}
+								variant="tertiary"
+								size="m"
+								href={social.link}
+								className="social-button"
+                                prefixIcon='openLink'
+							>
+								<span className="social-label">{social.label}</span>
+							</Button>
 						))}
-					</Grid>
-                    <Flex gap="m" direction="column" ref={experienceRef} id='experience'>
-                        <InlineCode
-                            className="shadow-m"
-                            style={{
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            alignSelf: 'flex-start',
-                            fontSize: 18
-                            }}
-                        >
-                            Experience
-                        </InlineCode>
-                        
-                        <Flex direction="column" gap="s">
-                            <Flex justifyContent="space-between" alignItems="center">
-                            <Text
-                                className="shadow-m"
-                                variant='heading-strong-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 20
-                                }}
-                            >
-                                PT Infotech Solutions
-                            </Text>
-                            <Text
-                                className="shadow-m"
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                                }}
-                            >
-                                Agustus 2024 - September 2024
-                            </Text>
-                            </Flex>
-                            
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                            }}
-                            >
-                            Quality Assurance (Freelance)
-                            </Text>
-                            
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Melakukan pengujian fungsional website menggunakan Selenium untuk memastikan semua fungsi button, link, dan form dapat berjalan dengan benar.
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Melakukan API Test menggunakan Postman untuk memastikan API dapat digunakan sesuai dengan kebutuhan.
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Melaksanakan pengujian antarmuka pengguna (UI) dan pengalaman pengguna (UX) secara manual untuk memastikan desain yang intuitif, responsif, dan mudah digunakan.
-                            </Text>
-                        </Flex>
+					</div>
+				</aside>
 
-                        <Flex direction="column" gap="s">
-                            <Flex justifyContent="space-between" alignItems="center">
-                            <Text
-                                className="shadow-m"
-                                variant='heading-strong-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 20
-                                }}
-                            >
-                                PT Denso Indonesia
-                            </Text>
-                            <Text
-                                className="shadow-m"
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                                }}
-                            >
-                                Mei 2023 - Mei 2024
-                            </Text>
-                            </Flex>
-                            
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                            }}
-                            >
-                            Software Developer
-                            </Text>
-                            
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Merancang dan membuat aplikasi Lot Collecting System, sebuah aplikasi untuk merekam dan menyimpan data part mekanikal yang akan digunakan.
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Merancang dan membuat aplikasi One Point Check System, sebuah aplikasi untuk mencegah kesalahan pergantian part elektronik.
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Merancang dan membuat aplikasi Repacking System, sebuah aplikasi untuk mengelola dan mengontrol part di warehouse.
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Merancang dan membuat aplikasi Tag Maker System, sebuah aplikasi untuk membuat QR Code untuk traceability.
-                            </Text>
-                        </Flex>
+				{/* Main Content */}
+				<main className="main-content">
+					{/* Navbar */}
+					<nav className="navbar">
+						<div className="navbar-container">
+							<div className="navbar-brand">
+								<Text variant="heading-strong-m" className="navbar-logo">MSR</Text>
+							</div>
+							<div className="navbar-links">
+								{links.map((link) => (
+									<Link
+										key={link.href}
+										href={link.href}
+										className="nav-link">
+										<Icon name={link.icon} size="m" className="nav-icon" />
+										<span className="nav-title">{link.title}</span>
+									</Link>
+								))}
+							</div>
+						</div>
+					</nav>
 
-                        <Flex direction="column" gap="s">
-                            <Flex justifyContent="space-between" alignItems="center">
-                            <Text
-                                className="shadow-m"
-                                variant='heading-strong-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 20
-                                }}
-                            >
-                                PT Lumintu Logic
-                            </Text>
-                            <Text
-                                className="shadow-m"
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                                }}
-                            >
-                                Agustus 2021 - Januari 2022
-                            </Text>
-                            </Flex>
-                            
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                            }}
-                            >
-                            Backend Developer
-                            </Text>
-                            
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Merancang dan membuat website Lumintu Events Ticketing platform untuk menjual tiket event.
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Memproduksi API menggunakan Directus untuk pembagian merchandise dalam pengelolaan logistik
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Membuat fitur widget QnA dan real-time chat pada website Lumintu Events.
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                            }}
-                            >
-                                • Merancang UI/UX Museum Digital untuk Kraton Ngayogyakarta.
-                            </Text>
-                        </Flex>
-                    </Flex>
-                    <Flex
-                            position="relative"
-                            flex={4} gap="24"
-                            direction="column"
-                            ref={skillsRef} id='skills'>
-                            <InlineCode
-                                className="shadow-m"
-                                style={{
-                                    width: 'fit-content',
-                                    padding: 'var(--static-space-8) var(--static-space-16)',
-                                    backdropFilter: 'blur(var(--static-space-1))',
-                                    alignSelf: 'left',
-                                    fontSize: 18}}>
-                                Skills <span className="brand-on-background-medium"></span>
-                            </InlineCode>
+					{/* Experience Section */}
+					<section id="experience" className="content-section">
+						<Heading variant="display-strong-s" className="section-heading">Experience</Heading>
+						<div className="timeline">
+							{[
+								{
+									company: 'PT Infotech Solutions',
+									role: 'Quality Assurance',
+									period: 'Agustus 2024 - September 2024',
+									description: [
+										'Melakukan pengujian fungsional website menggunakan Selenium',
+										'Melakukan API Test menggunakan Postman',
+										'Melaksanakan pengujian UI/UX'
+									]
+								},
+								{
+									company: 'PT Denso Indonesia',
+									role: 'Software Developer',
+									period: 'Mei 2023 - Mei 2024',
+									description: [
+										'Merancang dan membuat aplikasi Lot Collecting System',
+										'Merancang dan membuat aplikasi One Point Check System',
+										'Merancang dan membuat aplikasi Repacking System',
+										'Merancang dan membuat aplikasi Tag Maker System'
+									]
+								}
+							].map((exp, index) => (
+								<div key={exp.company} className="timeline-item">
+									<div className="timeline-content">
+										<Text variant="heading-strong-l" className="company-name">{exp.company}</Text>
+										<Text variant="heading-default-m" className="role-title">{exp.role}</Text>
+										<Text variant="body-default-s" className="period">{exp.period}</Text>
+										<ul className="description-list">
+											{exp.description.map((item, i) => (
+												<li key={i}>{item}</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							))}
+						</div>
+					</section>
 
-                            <Flex direction="column" gap="s">
-                            <Flex justifyContent="space-between">
-                            </Flex>
+					{/* Skills Section dengan slider yang diperbaiki */}
+					<section id="skills" className="content-section">
+						<Heading variant="display-strong-s" className="section-heading">Skills</Heading>
+						<div className="skills-container">
+							{[
+								{
+									title: "Front end",
+									skills: [
+										{ src: "images/logo/html.webp", alt: "HTML" },
+										{ src: "images/logo/css.webp", alt: "CSS" },
+										{ src: "images/logo/javascript.webp", alt: "JavaScript" },
+										{ src: "images/logo/react.webp", alt: "React" },
+										{ src: "images/logo/next.webp", alt: "Next.js", isBlack: true },
+										{ src: "images/logo/vue.webp", alt: "Vue" }
+									]
+								},
+								{
+									title: "Back end",
+									skills: [
+										{ src: "images/logo/php.webp", alt: "PHP" },
+										{ src: "images/logo/laravel.webp", alt: "Laravel" },
+										{ src: "images/logo/node.webp", alt: "Node.js" },
+										{ src: "images/logo/java.webp", alt: "Java" },
+										{ src: "images/logo/csharp.webp", alt: "C#", isBlack: true },
+										{ src: "images/logo/dotnet.webp", alt: ".NET" },
+										{ src: "images/logo/python.webp", alt: "Python" }
+									]
+								},
+								{
+									title: "Database",
+									skills: [
+										{ src: "images/logo/mysql.webp", alt: "MySQL" },
+										{ src: "images/logo/mariadb.webp", alt: "MariaDB" },
+										{ src: "images/logo/postgresql.webp", alt: "PostgreSQL" },
+										{ src: "images/logo/oracle.webp", alt: "Oracle" },
+										{ src: "images/logo/sqlserver.webp", alt: "SQL Server" }
+									]
+								}
+							].map((category, index) => (
+								<div key={index} className="skill-group">
+									<Text variant="heading-default-m" className="skill-heading">{category.title}</Text>
+									<div className="slider-container">
+										<div className="slider">
+											<div className="slide-track">
+												{/* Original items */}
+												{category.skills.map((skill, j) => (
+													<div key={j} className={skill.isBlack ? "blackSlide" : "slide"}>
+														<img src={skill.src} alt={skill.alt} loading="lazy" />
+													</div>
+												))}
+												{/* First duplicate for seamless loop */}
+												{category.skills.map((skill, j) => (
+													<div key={`dup1-${j}`} className={skill.isBlack ? "blackSlide" : "slide"}>
+														<img src={skill.src} alt={skill.alt} loading="lazy" />
+													</div>
+												))}
+												{/* Second duplicate for safety */}
+												{category.skills.map((skill, j) => (
+													<div key={`dup2-${j}`} className={skill.isBlack ? "blackSlide" : "slide"}>
+														<img src={skill.src} alt={skill.alt} loading="lazy" />
+													</div>
+												))}
+											</div>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+					</section>
 
-                            {/* add carousel */}
-                            <Text
-                                className="shadow-m"
-                                variant='heading-default-m'
-                                align='center'
-                                style={{
-                                textDecoration: 'underline',
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16,
-                                }}
-                            >
-                                Front end
-                            </Text>
-                            {/* carousel contain logo of tech */}
+					{/* Certifications Section */}
+					<section id="certifications" className="content-section">
+						<Heading variant="display-strong-s" className="section-heading">Certifications</Heading>
+						<div className="certifications-container">
+							{[
+								{
+									title: "Scrum Master",
+									organization: "Rakamin Academy",
+									year: "2022"
+								},
+								{
+									title: "Big Data",
+									organization: "Solusi247",
+									year: "2022"
+								},
+								{
+									title: "MTCNA",
+									organization: "IDNetworks",
+									year: "2022"
+								},
+								{
+									title: "TOEIC English Test",
+									organization: "ESL",
+									year: "2022",
+									score: "Score 675"
+								},
+								{
+									title: "Secure Coding",
+									organization: "Widya Security",
+									year: "2021"
+								}
+							].map((cert, index) => (
+								<div key={index} className="certification-item">
+									<Text variant="heading-strong-m" className="cert-title">{cert.title}</Text>
+									<Text variant="body-default-m" className="cert-org">{cert.organization}</Text>
+                                    {cert.score && <Text variant="body-default-s" className="cert-score">{cert.score}</Text>}
+									<Text variant="body-default-s" className="cert-year">{cert.year}</Text>
+								</div>
+							))}
+						</div>
+					</section>
 
-                            <div className='slider'>
-                                <div className='slide-track'>
-                                    <div className='slide'>
-                                        <img src="images/logo/html.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/css.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/javascript.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/react.webp" alt="" />
-                                    </div>
-                                    <div className='blackSlide'>
-                                        <img src="images/logo/next.webp"  alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/vue.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/html.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/css.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/javascript.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/react.webp" alt="" />
-                                    </div>
-                                    <div className='blackSlide'>
-                                        <img src="images/logo/next.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/vue.webp" alt="" />
-                                    </div><div className='slide'>
-                                        <img src="images/logo/html.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/css.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/javascript.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/react.webp" alt="" />
-                                    </div>
-                                    <div className='blackSlide'>
-                                        <img src="images/logo/next.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/vue.webp" alt="" />
-                                    </div>
-                                </div>
-                            </div>
+					{/* Portfolio Section yang diperbarui */}
+					<section id="portfolio" className="content-section">
+						<Heading variant="display-strong-s" className="section-heading">Portofolio</Heading>
+						<div className="portfolio-container">
+							<div className="portfolio-item">
+								<div className="portfolio-content">
+									<div className="portfolio-image-container">
+										<img 
+											src="images/logo/razansneakers.png" 
+											alt="Razan Sneakers" 
+											className="portfolio-image" 
+											style={{filter: 'invert(1)'}} 
+										/>
+									</div>
+									<div className="portfolio-details">
+										<Text variant="heading-strong-m" className="portfolio-title">
+											Razan Sneakers Store
+										</Text>
+										<Text variant="body-default-s" className="portfolio-description">
+											E-commerce sepatu autentik dengan PHP, JavaScript, dan Midtrans payment gateway.
+										</Text>
+										<Button
+											variant="primary"
+											size="m"
+											href="https://razansneakers.com"
+											label="Lihat Website"
+											className="portfolio-button"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
 
-
-                            <Text
-                            className="shadow-m"
-                            variant='heading-default-m'
-                            style={{
-                            textDecoration: 'underline',
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                Back end
-                            </Text>
-
-                            <div className='slider'>
-                                <div className='slide-track'>
-                                    <div className='slide'>
-                                        <img src="images/logo/php.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/laravel.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/node.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/java.webp" alt="" />
-                                    </div>
-                                    <div className='blackSlide'>
-                                        <img src="images/logo/csharp.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/dotnet.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/python.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/php.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/laravel.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/node.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/java.webp" alt="" />
-                                    </div>
-                                    <div className='blackSlide'>
-                                        <img src="images/logo/csharp.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/dotnet.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/python.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/php.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/laravel.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/node.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/java.webp" alt="" />
-                                    </div>
-                                    <div className='blackSlide'>
-                                        <img src="images/logo/csharp.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/dotnet.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/python.webp" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <Text
-                            className="shadow-m"
-                            variant='heading-default-m'
-                            style={{
-                            textDecoration: 'underline',
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                Database
-                            </Text>
-
-                            <div className='slider'>
-                                <div className='slide-track'>
-                                    <div className='slide'>
-                                        <img src="images/logo/mysql.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/mariadb.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/postgresql.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/oracle.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/sqlserver.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/mysql.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/mariadb.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/postgresql.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/oracle.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/sqlserver.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/mysql.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/mariadb.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/postgresql.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/oracle.webp" alt="" />
-                                    </div>
-                                    <div className='slide'>
-                                        <img src="images/logo/sqlserver.webp" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <Text
-                            className="shadow-m"
-                            variant='heading-default-m'
-                            style={{
-                            textDecoration: 'underline',
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                Tools
-                            </Text>
-
-                            <Text
-                            className="shadow-m"
-                            onSolid='neutral-weak'
-                            style={{
-                            width: 'fit-content',
-                            padding: 'var(--static-space-8) var(--static-space-16)',
-                            backdropFilter: 'blur(var(--static-space-1))',
-                            fontSize: 16
-                            }}
-                            >
-                                Visual Studio Code, Visual Studio (2008, 2019, 2022), XAMPP, MySql Workbench, DBeaver, SSMS, Github, Postman, Wordpress, Docker, Termius, Jira.
-                            </Text>
-
-                            </Flex>
-                    </Flex>
-
-                    <Flex
-                            position="relative"
-                            flex={4} gap="24"
-                            direction="column">
-                            <InlineCode
-                                className="shadow-m"
-                                style={{
-                                    width: 'fit-content',
-                                    padding: 'var(--static-space-8) var(--static-space-16)',
-                                    backdropFilter: 'blur(var(--static-space-1))',
-                                    alignSelf: 'left',
-                                    fontSize: 18}}>
-                                Certifications <span className="brand-on-background-medium"></span>
-                            </InlineCode>
-                            <Text
-                                className="shadow-m"
-                                variant='heading-default-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                                }}
-                            >
-                                Scrum Master - Rakamin Academy (2022)
-                            </Text>
-                            <Text
-                                className="shadow-m"
-                                variant='heading-default-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                                }}
-                            >
-                                Big Data - Solusi247 (2022)
-                            </Text>
-                            <Text
-                                className="shadow-m"
-                                variant='heading-default-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                                }}
-                            >
-                                MTCNA - IDNetworks (2022)
-                            </Text>
-
-                            <Text
-                                className="shadow-m"
-                                variant='heading-default-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                                }}
-                            >
-                                TOEIC English Test - ESL (2022) : Score 675
-                            </Text>
-                            <Text
-                                className="shadow-m"
-                                variant='heading-default-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                                }}
-                            >
-                                Secure Coding - Widya Security (2021)
-                            </Text>
-                    </Flex>
+                    {/* Education Section */}
+					<section id="education" className="content-section">
+						<Heading variant="display-strong-s" className="section-heading">Education</Heading>
+						<div className="education-container">
+							<div className="education-item">
+								<Text variant="heading-strong-m" className="institution">Politeknik Negeri Semarang</Text>
+								<Text variant="body-default-m" className="period">Agustus 2019 - Agustus 2022</Text>
+								<Text variant="body-strong-m" className="degree">D3 - Teknik Informatika</Text>
+								<Text variant="body-default-m" className="gpa">GPA : 3.79/4.00</Text>
+							</div>
+						</div>
+					</section>
                     
-                    <Flex
-                            position="relative"
-                            flex={4} gap="24"
-                            direction="column"
-                            ref={educationRef} id='education'>
-                            <InlineCode
-                                className="shadow-m"
-                                style={{
-                                    width: 'fit-content',
-                                    padding: 'var(--static-space-8) var(--static-space-16)',
-                                    backdropFilter: 'blur(var(--static-space-1))',
-                                    alignSelf: 'left',
-                                    fontSize: 18}}>
-                                Portofolio <span className="brand-on-background-medium"></span>
-                            </InlineCode>
-                            <Flex
-                                mobileDirection="column"
-                                fillWidth>
-                                <Flex
-                                    position="relative"
-                                    flex={2} paddingTop="56" paddingX="xl">
-                                    <img className='razan' src="images/logo/razansneakers.png" alt="" />
-                                </Flex>
-                                <Flex
-                                    position="relative"
-                                    flex={4} gap="24" marginBottom="104"
-                                    direction="column"
-                                    ref={profileRef} id='profile'>
-                                    <Heading
-                                        wrap="balance"
-                                        variant="display-strong-s">
-                                        <span className="font-code">
-                                            <LetterFx
-                                                trigger="instant">
-                                                    Razan Sneakers Store
-                                            </LetterFx>
-                                        </span>
-                                    </Heading>
-                                    <Text
-                                        variant="body-default-s"
-                                        onBackground="neutral-weak"
-                                        align="justify">
-                                                Razan Sneakers Store adalah situs e-commerce yang menjual sepatu 100% autentik.
-                                                Website ini dibuat menggunakan bahasa pemrograman php dan javascript,
-                                                serta sudah terintegrasi dengan midtrans payment gateway untuk pembayaran.
-                                    </Text>
-                                    <SmartLink
-                                        href='https://razansneakers.com'
-                                        >
-                                        Klik disini untuk lihat website
-                                        </SmartLink>
-                                </Flex>
-                            </Flex>
-                        </Flex>
+				</main>
+			</div>
 
-
-                    <Flex
-                            position="relative"
-                            flex={4} gap="24"
-                            direction="column"
-                            ref={educationRef} id='education'>
-                            <InlineCode
-                                className="shadow-m"
-                                style={{
-                                    width: 'fit-content',
-                                    padding: 'var(--static-space-8) var(--static-space-16)',
-                                    backdropFilter: 'blur(var(--static-space-1))',
-                                    alignSelf: 'left',
-                                    fontSize: 18}}>
-                                Education <span className="brand-on-background-medium"></span>
-                            </InlineCode>
-
-                            <Flex direction="column" gap="s">
-                            <Flex justifyContent="space-between" alignItems="center">
-                            <Text
-                                className="shadow-m"
-                                variant='heading-strong-m'
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 20
-                                }}
-                            >
-                                Politeknik Negeri Semarang
-                            </Text>
-                            <Text
-                                className="shadow-m"
-                                style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 14
-                                }}
-                            >
-                                Agustus 2019 - Agustus 2022
-                            </Text>
-                            </Flex>
-                            
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                            }}
-                            >
-                                GPA : 3.79/4.00
-                            </Text>
-                            <Text
-                            className="shadow-m"
-                            onSolid="neutral-weak"
-                            style={{
-                                width: 'fit-content',
-                                padding: 'var(--static-space-8) var(--static-space-16)',
-                                backdropFilter: 'blur(var(--static-space-1))',
-                                fontSize: 16
-                            }}
-                            >
-                                D3 - Teknik Informatika
-                            </Text>
-                            </Flex>
-                    </Flex>
-				</Flex>
-			</Flex>
-			<Flex
-				as="footer"
-				position="relative"
-				fillWidth paddingX="l" paddingY="m"
-				justifyContent="space-between">
-				<Text
-					variant="body-default-s" onBackground="neutral-weak">
-					© 2024 Build With Once UI Next JS, <Link href="https://github.com/once-ui-system/nextjs-starter?tab=MIT-1-ov-file">MIT License</Link>
-				</Text>
-			</Flex>
-		</Flex>
+			{/* Password Modal */}
+			{showPasswordInput && (
+				<div className="password-modal">
+					<div className="password-container">
+						<Input
+							type="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							onKeyDown={handleKeyDown}
+							label="Password CV"
+							id="cv-password"
+						/>
+						<Flex gap="m">
+							<Button
+								variant="primary"
+								size="m"
+								onClick={handlePasswordSubmit}
+								label="Submit"
+							/>
+							<Button
+								variant="danger"
+								size="m"
+								onClick={() => setShowPasswordInput(false)}
+								label="Close"
+							/>
+						</Flex>
+					</div>
+				</div>
+			)}
+		</div>
 	);
 }
